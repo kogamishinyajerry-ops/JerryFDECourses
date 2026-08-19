@@ -1,0 +1,20 @@
+{
+  "source": "feedback.csv",
+  "time_range": {
+    "start": "2026-07-01",
+    "end": "2026-07-31"
+  },
+  "expected_output": [
+    "Excel 汇总表",
+    "一页摘要"
+  ],
+  "due_date": "2026-08-10T17:00:00+08:00",
+  "owner": "Alex",
+  "reviewer": "Morgan",
+  "acceptance_criteria": [
+    "全部问题完成分类",
+    "重复项已合并",
+    "每项保留原始编号"
+  ],
+  "confirmed_by": "DEMO_REQUESTER"
+}
