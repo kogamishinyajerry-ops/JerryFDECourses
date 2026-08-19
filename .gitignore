@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.coverage
+
+# Node / site tooling
+node_modules/
+dist/
+build/
+
+# Course runtime output
+modules/*/lab/output/
+modules/*/lab/output-*/
+*.log
+
+# Recording and editing caches
+*.mp4
+*.mov
+*.mkv
+*.wav
+*.aiff
+*.prproj
+*.drp
+*.fcpxml
+recordings/
+exports/
+proxies/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+
+# Temporary
+.tmp/
+tmp/
