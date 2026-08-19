@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/jerry-fde/m01/task-card.schema.json",
+  "title": "M01 Public Demo Task Card",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "request_id",
+    "original_request",
+    "objective",
+    "source",
+    "time_range_text",
+    "time_range",
+    "usage_context",
+    "expected_output",
+    "due_date",
+    "owner",
+    "reviewer",
+    "acceptance_criteria",
+    "confidentiality",
+    "confirmed_by",
+    "field_provenance",
+    "status"
+  ],
+  "properties": {
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "original_request": {
+      "type": "string",
+      "minLength": 1
+    },
+    "objective": {
+      "type": ["string", "null"]
+    },
+    "source": {
+      "type": ["string", "null"]
+    },
+    "time_range_text": {
+      "type": ["string", "null"]
+    },
+    "time_range": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["start", "end"],
+          "properties": {
+            "start": {"type": "string", "format": "date"},
+            "end": {"type": "string", "format": "date"}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["relative"],
+          "properties": {
+            "relative": {"type": "string"}
+          }
+        }
+      ]
+    },
+    "usage_context": {
+      "type": ["string", "null"]
+    },
+    "expected_output": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "minLength": 1}
+        }
+      ]
+    },
+    "due_date": {
+      "type": ["string", "null"]
+    },
+    "owner": {
+      "type": ["string", "null"]
+    },
+    "reviewer": {
+      "type": ["string", "null"]
+    },
+    "acceptance_criteria": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "confidentiality": {
+      "const": "PUBLIC_DEMO"
+    },
+    "confirmed_by": {
+      "type": ["string", "null"]
+    },
+    "field_provenance": {
+      "type": "object",
+      "additionalProperties": {
+        "enum": [
+          "SOURCE_TEXT",
+          "SYSTEM_DEFAULT_UNCONFIRMED",
+          "HUMAN_CONFIRMED"
+        ]
+      }
+    },
+    "status": {
+      "enum": ["DRAFT", "NEEDS_CLARIFICATION", "READY"]
+    }
+  }
+}
