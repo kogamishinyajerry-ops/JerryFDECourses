@@ -15,6 +15,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+SELF_PATH = Path(__file__).resolve()
 MAX_FILE_BYTES = 2 * 1024 * 1024
 ALLOWED_LARGE_EXTENSIONS = {".mp4", ".mov", ".webm"}
 TEXT_EXTENSIONS = {
@@ -86,6 +87,11 @@ def check_file_sizes(files: list[Path]) -> list[str]:
 def check_sensitive_patterns(files: list[Path]) -> list[str]:
     errors: list[str] = []
     for path in files:
+        # Detection regexes are intentionally present in this script. Scanning
+        # the scanner itself creates false positives without testing any course
+        # content, so this one file is excluded from pattern matching only.
+        if path.resolve() == SELF_PATH:
+            continue
         text = read_text(path)
         if text is None:
             continue
