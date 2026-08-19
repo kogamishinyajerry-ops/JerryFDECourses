@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>M01｜从一条模糊需求开始</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="课程导航">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">{ }</div>
+        <div>
+          <strong>AI 时代的工业 FDE</strong>
+          <span>工程师的智能体开发课</span>
+        </div>
+      </div>
+
+      <div class="module-switcher">
+        <span class="eyebrow">当前模块</span>
+        <strong>M01｜从一条模糊需求开始</strong>
+      </div>
+
+      <nav id="lesson-nav" class="lesson-nav" aria-label="M01 步骤"></nav>
+
+      <div class="sidebar-footer">
+        <div class="progress-copy">
+          <span>课程进度</span>
+          <strong id="progress-label">1 / 8</strong>
+        </div>
+        <div class="progress-track" aria-hidden="true">
+          <span id="progress-bar"></span>
+        </div>
+        <p>所有数据均为 PUBLIC_DEMO。</p>
+      </div>
+    </aside>
+
+    <main class="workspace">
+      <header class="workspace-header">
+        <div>
+          <p class="eyebrow">MAIN LESSON · M01</p>
+          <h1 id="step-title">从一条模糊需求开始</h1>
+          <p id="step-subtitle" class="lead">把一句“请帮我整理一下”，变成一张可以执行、可以确认的任务卡。</p>
+        </div>
+        <div class="header-meta">
+          <span class="meta-chip">公开合成案例</span>
+          <span class="meta-chip">约 30 分钟</span>
+          <span id="status-chip" class="status-chip status-draft">DRAFT</span>
+        </div>
+      </header>
+
+      <section class="lesson-grid">
+        <article id="stage" class="stage" aria-live="polite"></article>
+
+        <aside class="evidence-panel" aria-label="当前证据">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">CURRENT EVIDENCE</p>
+              <h2>当前证据</h2>
+            </div>
+            <span id="evidence-count" class="count-badge">0</span>
+          </div>
+          <div id="evidence-list" class="evidence-list"></div>
+
+          <div class="boundary-card">
+            <p class="eyebrow">BOUNDARY</p>
+            <strong>状态与证据必须匹配</strong>
+            <p id="boundary-copy">请求刚被记录，系统尚未判断能否开始。</p>
+          </div>
+        </aside>
+      </section>
+
+      <footer class="lesson-controls">
+        <button id="prev-button" class="button button-secondary" type="button">上一步</button>
+        <div class="keyboard-hint">使用 ← → 键切换步骤</div>
+        <button id="next-button" class="button button-primary" type="button">下一步</button>
+      </footer>
+    </main>
+  </div>
+
+  <template id="code-window-template">
+    <div class="code-window">
+      <div class="window-bar">
+        <span></span><span></span><span></span>
+        <strong class="window-title"></strong>
+      </div>
+      <pre><code></code></pre>
+    </div>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
