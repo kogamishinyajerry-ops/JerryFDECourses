@@ -1,0 +1,72 @@
+name: M01 RC Review Package
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - course-foundation
+    paths:
+      - "modules/M01/**"
+      - "docs/**"
+      - "README.md"
+      - "CHANGELOG.md"
+      - "LICENSE"
+      - "scripts/check_public_release.py"
+      - "scripts/package_m01_rc.py"
+      - ".github/workflows/m01-rc-package.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verify course source
+        run: |
+          python -m unittest discover modules/M01/lab/tests -v
+          python scripts/check_public_release.py
+          node --check modules/M01/site/app.js
+
+      - name: Build review-only RC package
+        run: |
+          python scripts/package_m01_rc.py \
+            --output-dir dist \
+            --source-commit "$GITHUB_SHA"
+
+      - name: Verify package status and manifest
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path('dist/M01_RC1_CANDIDATE')
+          status = json.loads((root / 'PACKAGE_STATUS.json').read_text(encoding='utf-8'))
+          assert status['package_status'] == 'RC1_CANDIDATE'
+          assert status['released'] is False
+          assert status['pilot_complete'] is False
+          assert status['contains_final_video'] is False
+          assert status['source_commit']
+          PY
+
+          cd dist/M01_RC1_CANDIDATE
+          sha256sum --check MANIFEST.sha256
+
+      - name: Upload M01 RC review package
+        uses: actions/upload-artifact@v4
+        with:
+          name: M01-RC1-CANDIDATE-${{ github.sha }}
+          path: |
+            dist/JerryFDECourses_M01_RC1_CANDIDATE_*.zip
+            dist/M01_RC1_CANDIDATE/PACKAGE_STATUS.json
+            dist/M01_RC1_CANDIDATE/MANIFEST.sha256
+          if-no-files-found: error
+          retention-days: 14
