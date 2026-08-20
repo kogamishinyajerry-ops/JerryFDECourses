@@ -8,6 +8,19 @@
 
 第一部分「工程师如何进入 AI 时代」第 1 模块。
 
+## 当前发布状态
+
+```text
+RC1_CANDIDATE
+```
+
+课程工程已经收口，可以进入正式录制、人工复核和试讲；尚未正式发布。
+
+- 状态与门禁：[`RC1_STATUS.md`](RC1_STATUS.md)
+- 真人素材交接：[`lesson/HUMAN_RECORDING_HANDOFF.md`](lesson/HUMAN_RECORDING_HANDOFF.md)
+- 最终组装与验收：[`lesson/FINAL_ASSEMBLY_CHECKLIST.md`](lesson/FINAL_ASSEMBLY_CHECKLIST.md)
+- 试讲与成片任务：Issue #2
+
 ## 适合对象
 
 - L0 AI 使用者；
@@ -81,11 +94,14 @@ READY
 ```text
 M01/
 ├── README.md
+├── RC1_STATUS.md
 ├── lesson/
 │   ├── MODULE_CARD.md
 │   ├── INSTRUCTOR_SCRIPT.md
 │   ├── STORYBOARD.md
 │   ├── SCREEN_RECORDING.md
+│   ├── HUMAN_RECORDING_HANDOFF.md
+│   ├── FINAL_ASSEMBLY_CHECKLIST.md
 │   └── SUBTITLES.zh-CN.srt
 ├── lab/
 │   ├── README.md
