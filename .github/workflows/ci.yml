@@ -1,0 +1,67 @@
+name: Course CI
+
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Python unit tests
+        run: python -m unittest discover modules/M01/lab/tests -v
+
+      - name: Public release checks
+        run: python scripts/check_public_release.py
+
+      - name: JavaScript syntax
+        run: node --check modules/M01/site/app.js
+
+      - name: Course site file check
+        run: |
+          test -s modules/M01/site/index.html
+          test -s modules/M01/site/styles.css
+          test -s modules/M01/assets/m01-flow.svg
+
+      - name: M01 failure path
+        run: |
+          set +e
+          python modules/M01/lab/task_pipeline.py \
+            --mode v1 \
+            --request modules/M01/lab/data/request.txt \
+            --output /tmp/m01-needs
+          code=$?
+          set -e
+          test "$code" -eq 2
+          grep -q "NEEDS_CLARIFICATION" /tmp/m01-needs/status.txt
+
+      - name: M01 ready path
+        run: |
+          python modules/M01/lab/task_pipeline.py \
+            --mode v1 \
+            --request modules/M01/lab/data/request.txt \
+            --confirmation modules/M01/lab/data/confirmation.json \
+            --output /tmp/m01-ready
+          grep -q "READY" /tmp/m01-ready/status.txt
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          card = json.loads(Path('/tmp/m01-ready/task_card.json').read_text(encoding='utf-8'))
+          assert card['status'] == 'READY'
+          assert card['confirmed_by'] == 'DEMO_REQUESTER'
+          assert card['confidentiality'] == 'PUBLIC_DEMO'
+          PY

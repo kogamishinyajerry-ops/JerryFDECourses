@@ -1,0 +1,40 @@
+{
+  "request_id": "REQ-001",
+  "original_request": "请把上个月收到的用户问题整理一下，下周评审时用。",
+  "objective": "整理用户问题",
+  "source": "feedback.csv",
+  "time_range_text": "上个月",
+  "time_range": {
+    "start": "2026-07-01",
+    "end": "2026-07-31"
+  },
+  "usage_context": "下周评审",
+  "expected_output": [
+    "Excel 汇总表",
+    "一页摘要"
+  ],
+  "due_date": "2026-08-10T17:00:00+08:00",
+  "owner": "Alex",
+  "reviewer": "Morgan",
+  "acceptance_criteria": [
+    "全部问题完成分类",
+    "重复项已合并",
+    "每项保留原始编号"
+  ],
+  "confidentiality": "PUBLIC_DEMO",
+  "confirmed_by": "DEMO_REQUESTER",
+  "field_provenance": {
+    "objective": "SOURCE_TEXT",
+    "time_range_text": "SOURCE_TEXT",
+    "usage_context": "SOURCE_TEXT",
+    "source": "HUMAN_CONFIRMED",
+    "time_range": "HUMAN_CONFIRMED",
+    "expected_output": "HUMAN_CONFIRMED",
+    "due_date": "HUMAN_CONFIRMED",
+    "owner": "HUMAN_CONFIRMED",
+    "reviewer": "HUMAN_CONFIRMED",
+    "acceptance_criteria": "HUMAN_CONFIRMED",
+    "confirmed_by": "HUMAN_CONFIRMED"
+  },
+  "status": "READY"
+}
